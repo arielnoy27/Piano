@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Keyboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Audio Status (minimal) -->
+        <div class="audio-status" id="audioStatus">🔇 Click anywhere to enable audio</div>
+
+        <!-- Instrument Selector -->
+        <div class="instrument-selector">
+            <select id="instrumentSelect">
+                <option value="piano">🎹 Acoustic</option>
+                <option value="bright">✨ Bright</option>
+                <option value="electric">🎵 Music Box</option>
+                <option value="organ">🎭 Organ</option>
+                <option value="bell">🎸 Rhodes</option>
+                <option value="synth">🔮 Synth</option>
+                <option value="guitar">🎸 Guitar</option>
+                <option value="flute">🎼 Piano</option>
+            </select>
+        </div>
+
+        <!-- Piano Keyboard -->
+        <div class="piano-container">
+            <div class="piano-keyboard" id="keyboard">
+                <!-- White Keys (C2-B4) -->
+                <!-- Octave 2 -->
+                <div class="key white c" data-note="C2" data-freq="65.41"></div>
+                <div class="key white d" data-note="D2" data-freq="73.42"></div>
+                <div class="key white e" data-note="E2" data-freq="82.41"></div>
+                <div class="key white f" data-note="F2" data-freq="87.31"></div>
+                <div class="key white g" data-note="G2" data-freq="98.00"></div>
+                <div class="key white a" data-note="A2" data-freq="110.00"></div>
+                <div class="key white b" data-note="B2" data-freq="123.47"></div>
+                
+                <!-- Octave 3 -->
+                <div class="key white c" data-note="C3" data-freq="130.81"></div>
+                <div class="key white d" data-note="D3" data-freq="146.83"></div>
+                <div class="key white e" data-note="E3" data-freq="164.81"></div>
+                <div class="key white f" data-note="F3" data-freq="174.61"></div>
+                <div class="key white g" data-note="G3" data-freq="196.00"></div>
+                <div class="key white a" data-note="A3" data-freq="220.00"></div>
+                <div class="key white b" data-note="B3" data-freq="246.94"></div>
+                
+                <!-- Octave 4 -->
+                <div class="key white c" data-note="C4" data-freq="261.63"></div>
+                <div class="key white d" data-note="D4" data-freq="293.66"></div>
+                <div class="key white e" data-note="E4" data-freq="329.63"></div>
+                <div class="key white f" data-note="F4" data-freq="349.23"></div>
+                <div class="key white g" data-note="G4" data-freq="392.00"></div>
+                <div class="key white a" data-note="A4" data-freq="440.00"></div>
+                <div class="key white b" data-note="B4" data-freq="493.88"></div>
+
+                <!-- Black Keys -->
+                <!-- Octave 2 -->
+                <div class="key black cs" data-note="C#2" data-freq="69.30" style="left: 60px;"></div>
+                <div class="key black ds" data-note="D#2" data-freq="77.78" style="left: 150px;"></div>
+                <div class="key black fs" data-note="F#2" data-freq="92.50" style="left: 330px;"></div>
+                <div class="key black gs" data-note="G#2" data-freq="103.83" style="left: 420px;"></div>
+                <div class="key black as" data-note="A#2" data-freq="116.54" style="left: 510px;"></div>
+                
+                <!-- Octave 3 -->
+                <div class="key black cs" data-note="C#3" data-freq="138.59" style="left: 690px;"></div>
+                <div class="key black ds" data-note="D#3" data-freq="155.56" style="left: 780px;"></div>
+                <div class="key black fs" data-note="F#3" data-freq="185.00" style="left: 960px;"></div>
+                <div class="key black gs" data-note="G#3" data-freq="207.65" style="left: 1050px;"></div>
+                <div class="key black as" data-note="A#3" data-freq="233.08" style="left: 1140px;"></div>
+                
+                <!-- Octave 4 -->
+                <div class="key black cs" data-note="C#4" data-freq="277.18" style="left: 1320px;"></div>
+                <div class="key black ds" data-note="D#4" data-freq="311.13" style="left: 1410px;"></div>
+                <div class="key black fs" data-note="F#4" data-freq="369.99" style="left: 1590px;"></div>
+                <div class="key black gs" data-note="G#4" data-freq="415.30" style="left: 1680px;"></div>
+                <div class="key black as" data-note="A#4" data-freq="466.16" style="left: 1770px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
