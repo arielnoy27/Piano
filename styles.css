@@ -1,0 +1,352 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Audio Status Indicator */
+.audio-status {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.audio-status.enabled {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+}
+
+/* Instrument Selector */
+.instrument-selector {
+    z-index: 1000;
+}
+
+#instrumentSelect {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: none;
+    border-radius: 25px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    outline: none;
+    min-width: 200px;
+}
+
+#instrumentSelect:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 12px 20px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+#instrumentSelect:focus {
+    box-shadow: 
+        0 0 0 3px rgba(102, 126, 234, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* Piano Container */
+.piano-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.piano-keyboard {
+    position: relative;
+    height: 620px;
+    width: 1890px; /* 21 white keys × 90px */
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* White Keys */
+.key.white {
+    position: absolute;
+    width: 90px;
+    height: 600px;
+    border: 2px solid #333;
+    border-radius: 0 0 8px 8px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 
+        0 4px 8px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    user-select: none;
+}
+
+/* Xylophone Colors for White Keys */
+.key.white.c { background: linear-gradient(to bottom, #ff6b6b, #ff5252); }
+.key.white.d { background: linear-gradient(to bottom, #ffa726, #ff9800); }
+.key.white.e { background: linear-gradient(to bottom, #ffeb3b, #ffc107); }
+.key.white.f { background: linear-gradient(to bottom, #66bb6a, #4caf50); }
+.key.white.g { background: linear-gradient(to bottom, #42a5f5, #2196f3); }
+.key.white.a { background: linear-gradient(to bottom, #5c6bc0, #3f51b5); }
+.key.white.b { background: linear-gradient(to bottom, #ab47bc, #9c27b0); }
+
+/* White Key Positioning */
+.key.white:nth-of-type(1) { left: 0px; }
+.key.white:nth-of-type(2) { left: 90px; }
+.key.white:nth-of-type(3) { left: 180px; }
+.key.white:nth-of-type(4) { left: 270px; }
+.key.white:nth-of-type(5) { left: 360px; }
+.key.white:nth-of-type(6) { left: 450px; }
+.key.white:nth-of-type(7) { left: 540px; }
+.key.white:nth-of-type(8) { left: 630px; }
+.key.white:nth-of-type(9) { left: 720px; }
+.key.white:nth-of-type(10) { left: 810px; }
+.key.white:nth-of-type(11) { left: 900px; }
+.key.white:nth-of-type(12) { left: 990px; }
+.key.white:nth-of-type(13) { left: 1080px; }
+.key.white:nth-of-type(14) { left: 1170px; }
+.key.white:nth-of-type(15) { left: 1260px; }
+.key.white:nth-of-type(16) { left: 1350px; }
+.key.white:nth-of-type(17) { left: 1440px; }
+.key.white:nth-of-type(18) { left: 1530px; }
+.key.white:nth-of-type(19) { left: 1620px; }
+.key.white:nth-of-type(20) { left: 1710px; }
+.key.white:nth-of-type(21) { left: 1800px; }
+
+/* Black Keys */
+.key.black {
+    position: absolute;
+    width: 60px;
+    height: 300px;
+    background: linear-gradient(to bottom, #2c2c2c, #1a1a1a);
+    border: 1px solid #000;
+    border-radius: 0 0 6px 6px;
+    cursor: pointer;
+    z-index: 100;
+    transition: all 0.1s ease;
+    box-shadow: 
+        0 6px 12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1);
+    user-select: none;
+}
+
+/* Key Press Effects */
+.key:active,
+.key.pressed {
+    transform: translateY(2px);
+}
+
+.key.white:active,
+.key.white.pressed {
+    filter: brightness(0.7);
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.4),
+        inset 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.key.black:active,
+.key.black.pressed {
+    background: linear-gradient(to bottom, #1a1a1a, #0a0a0a);
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.6),
+        inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1920px) {
+    .piano-keyboard {
+        transform-origin: center top;
+        transform: scale(0.9);
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .piano-keyboard {
+        transform: scale(0.8);
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .piano-keyboard {
+        transform: scale(0.7);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .piano-keyboard {
+        transform: scale(0.6);
+    }
+    
+    .container {
+        gap: 20px;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .piano-keyboard {
+        transform: scale(0.5);
+    }
+    
+    #instrumentSelect {
+        font-size: 14px;
+        padding: 10px 20px;
+        min-width: 180px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .piano-keyboard {
+        transform: scale(0.4);
+    }
+    
+    .container {
+        gap: 15px;
+        padding: 10px;
+    }
+}
+
+/* 12.4" Tablet Specific Optimizations */
+/* iPad Pro 12.9" and similar large tablets (landscape) */
+@media screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+    .piano-keyboard {
+        transform: scale(0.68);
+        transform-origin: center top;
+    }
+    
+    .container {
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    .piano-container {
+        padding: 15px;
+        overflow-x: auto;
+        max-width: 95vw;
+    }
+    
+    .audio-status {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    
+    #instrumentSelect {
+        font-size: 15px;
+        padding: 10px 20px;
+        min-width: 180px;
+    }
+}
+
+/* 12.4" Tablet Portrait Mode */
+@media screen and (min-width: 800px) and (max-width: 1024px) and (orientation: portrait) {
+    .piano-keyboard {
+        transform: scale(0.45);
+        transform-origin: center top;
+    }
+    
+    .container {
+        gap: 15px;
+        padding: 12px;
+    }
+    
+    .piano-container {
+        padding: 12px;
+        overflow-x: auto;
+        max-width: 98vw;
+    }
+    
+    .audio-status {
+        font-size: 13px;
+        padding: 6px 14px;
+    }
+    
+    #instrumentSelect {
+        font-size: 14px;
+        padding: 8px 16px;
+        min-width: 160px;
+    }
+}
+
+/* Enhanced Touch Support for Tablets */
+@media (pointer: coarse) {
+    .key.white {
+        /* Slightly larger touch targets for better tablet experience */
+        border-width: 1px;
+    }
+    
+    .key.black {
+        /* Enhanced black key visibility on tablets */
+        border-width: 1px;
+        border-color: #000;
+    }
+    
+    #instrumentSelect {
+        /* Better touch interaction for dropdown */
+        min-height: 44px;
+        padding: 12px 20px;
+    }
+}
+
+/* Optimized for Samsung Galaxy Tab S8+ (12.4") and similar */
+@media screen and (min-width: 1200px) and (max-width: 1350px) and (orientation: landscape) {
+    .piano-keyboard {
+        transform: scale(0.7);
+        transform-origin: center top;
+    }
+    
+    .container {
+        gap: 18px;
+        padding: 14px;
+        max-width: 100vw;
+    }
+    
+    .piano-container {
+        padding: 14px;
+        border-radius: 16px;
+        max-width: 96vw;
+        overflow-x: auto;
+    }
+}
+
+/* High DPI Tablet Displays */
+@media screen and (min-resolution: 150dpi) and (min-width: 800px) and (max-width: 1400px) {
+    .key.white, .key.black {
+        /* Sharper borders on high-DPI tablets */
+        border-width: 1px;
+    }
+    
+    .piano-container {
+        /* Enhanced backdrop blur for retina displays */
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+}
