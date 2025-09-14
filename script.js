@@ -1,5 +1,5 @@
-// Piano with Original Colorful Design + Working Audio
-class ColorfulPiano {
+// Classic Piano with Warm, Natural Sound
+class ClassicPiano {
     constructor() {
         this.audioContext = null;
         this.oscillators = new Map();
@@ -7,7 +7,7 @@ class ColorfulPiano {
         this.volume = 0.7;
         this.isAudioEnabled = false;
         
-        // Keyboard mapping for 3 octaves
+        // Keyboard mapping
         this.keyboardMap = {
             // Octave 2 (Lower)
             'q': 'C2', '2': 'C#2', 'w': 'D2', '3': 'D#2', 'e': 'E2',
@@ -22,71 +22,107 @@ class ColorfulPiano {
             '[': 'F4', '=': 'F#4', ']': 'G4', '\\': 'G#4'
         };
 
-        // Instrument configurations
+        // Classic instrument configurations - focused on traditional piano sound
         this.instruments = {
             piano: {
-                type: 'triangle',
-                attack: 0.01,
+                oscillators: [
+                    { type: 'triangle', detune: 0, gain: 0.6 },
+                    { type: 'sine', detune: 0, gain: 0.3 },
+                    { type: 'triangle', detune: 1200, gain: 0.15 } // octave higher, quieter
+                ],
+                attack: 0.02,
                 decay: 0.3,
-                sustain: 0.4,
+                sustain: 0.7,
                 release: 1.2,
-                harmonics: [1, 0.5, 0.25]
+                filterFreq: 2800,
+                filterType: 'lowpass'
             },
             bright: {
-                type: 'square',
-                attack: 0.005,
-                decay: 0.1,
-                sustain: 0.3,
+                oscillators: [
+                    { type: 'triangle', detune: 0, gain: 0.5 },
+                    { type: 'square', detune: 0, gain: 0.2 },
+                    { type: 'sine', detune: 1200, gain: 0.2 }
+                ],
+                attack: 0.01,
+                decay: 0.2,
+                sustain: 0.5,
                 release: 0.8,
-                harmonics: [1, 0.7, 0.4]
+                filterFreq: 3500,
+                filterType: 'lowpass'
             },
             electric: {
-                type: 'sine',
-                attack: 0.001,
-                decay: 2,
-                sustain: 0,
-                release: 2,
-                harmonics: [1, 0.4, 0.2, 0.1, 0.05]
-            },
-            organ: {
-                type: 'sawtooth',
+                oscillators: [
+                    { type: 'sine', detune: 0, gain: 0.8 },
+                    { type: 'triangle', detune: 700, gain: 0.2 }
+                ],
                 attack: 0.01,
-                decay: 0.1,
-                sustain: 0.9,
-                release: 0.1,
-                harmonics: [1, 0.6, 0.4, 0.2]
-            },
-            bell: {
-                type: 'triangle',
-                attack: 0.001,
                 decay: 1.5,
                 sustain: 0.1,
-                release: 0.5,
-                harmonics: [1, 0.8, 0.3, 0.1]
+                release: 2.0,
+                filterFreq: 2200,
+                filterType: 'lowpass'
+            },
+            organ: {
+                oscillators: [
+                    { type: 'sine', detune: 0, gain: 0.5 },
+                    { type: 'sine', detune: 1200, gain: 0.3 },
+                    { type: 'sine', detune: 1900, gain: 0.2 }
+                ],
+                attack: 0.05,
+                decay: 0.1,
+                sustain: 0.9,
+                release: 0.2,
+                filterFreq: 4000,
+                filterType: 'lowpass'
+            },
+            bell: {
+                oscillators: [
+                    { type: 'sine', detune: 0, gain: 0.7 },
+                    { type: 'sine', detune: 1700, gain: 0.3 }
+                ],
+                attack: 0.01,
+                decay: 2.0,
+                sustain: 0.1,
+                release: 3.0,
+                filterFreq: 5000,
+                filterType: 'lowpass'
             },
             synth: {
-                type: 'sawtooth',
-                attack: 0.005,
+                oscillators: [
+                    { type: 'sawtooth', detune: 0, gain: 0.6 },
+                    { type: 'square', detune: -7, gain: 0.3 }
+                ],
+                attack: 0.02,
                 decay: 0.3,
-                sustain: 0.4,
-                release: 1.2,
-                harmonics: [1, 0.5, 0.25, 0.125]
+                sustain: 0.6,
+                release: 1.0,
+                filterFreq: 3000,
+                filterType: 'lowpass'
             },
             guitar: {
-                type: 'triangle',
-                attack: 0.01,
-                decay: 1,
-                sustain: 0.1,
-                release: 2,
-                harmonics: [1, 0.6, 0.3, 0.1]
+                oscillators: [
+                    { type: 'triangle', detune: 0, gain: 0.6 },
+                    { type: 'sine', detune: 1200, gain: 0.25 },
+                    { type: 'triangle', detune: -1200, gain: 0.15 }
+                ],
+                attack: 0.02,
+                decay: 1.0,
+                sustain: 0.3,
+                release: 2.0,
+                filterFreq: 2500,
+                filterType: 'lowpass'
             },
             flute: {
-                type: 'sine',
+                oscillators: [
+                    { type: 'sine', detune: 0, gain: 0.8 },
+                    { type: 'triangle', detune: 1200, gain: 0.15 }
+                ],
                 attack: 0.1,
                 decay: 0.2,
                 sustain: 0.8,
-                release: 0.3,
-                harmonics: [1, 0.3, 0.1]
+                release: 0.4,
+                filterFreq: 3500,
+                filterType: 'lowpass'
             }
         };
 
@@ -111,7 +147,7 @@ class ColorfulPiano {
             
             this.isAudioEnabled = true;
             this.updateAudioStatus();
-            console.log('Colorful Piano initialized successfully!');
+            console.log('Classic Piano initialized successfully!');
             
             return true;
         } catch (error) {
@@ -176,7 +212,6 @@ class ColorfulPiano {
         document.addEventListener('keydown', (e) => {
             if (e.repeat) return;
             
-            // ESC to stop all
             if (e.key === 'Escape') {
                 this.stopAllNotes();
                 return;
@@ -206,32 +241,47 @@ class ColorfulPiano {
         document.addEventListener('keydown', this.initAudioContext.bind(this), { once: true });
     }
 
-    createComplexTone(frequency, instrument) {
+    createClassicTone(frequency, instrument) {
         const config = this.instruments[instrument];
         const oscillators = [];
         const gainNodes = [];
+        
+        // Create master gain for this note
         const masterGain = this.audioContext.createGain();
-
-        // Create harmonics for richer sound
-        config.harmonics.forEach((amplitude, index) => {
+        masterGain.gain.setValueAtTime(0, this.audioContext.currentTime);
+        
+        // Create filter for warmer sound
+        const filter = this.audioContext.createBiquadFilter();
+        filter.type = config.filterType;
+        filter.frequency.setValueAtTime(config.filterFreq, this.audioContext.currentTime);
+        filter.Q.setValueAtTime(1, this.audioContext.currentTime);
+        
+        // Create oscillators based on configuration
+        config.oscillators.forEach((oscConfig, index) => {
             const oscillator = this.audioContext.createOscillator();
             const gainNode = this.audioContext.createGain();
             
-            oscillator.frequency.setValueAtTime(frequency * (index + 1), this.audioContext.currentTime);
-            oscillator.type = config.type;
+            // Set frequency with detune
+            oscillator.frequency.setValueAtTime(frequency, this.audioContext.currentTime);
+            oscillator.detune.setValueAtTime(oscConfig.detune, this.audioContext.currentTime);
+            oscillator.type = oscConfig.type;
             
-            gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+            // Set gain
+            gainNode.gain.setValueAtTime(oscConfig.gain, this.audioContext.currentTime);
             
+            // Connect: oscillator -> gainNode -> masterGain
             oscillator.connect(gainNode);
             gainNode.connect(masterGain);
             
             oscillators.push(oscillator);
-            gainNodes.push({ node: gainNode, amplitude });
+            gainNodes.push(gainNode);
         });
-
-        masterGain.connect(this.audioContext.destination);
-
-        return { oscillators, gainNodes, masterGain, config };
+        
+        // Connect through filter to destination
+        masterGain.connect(filter);
+        filter.connect(this.audioContext.destination);
+        
+        return { oscillators, gainNodes, masterGain, filter, config };
     }
 
     async playNote(keyElement) {
@@ -253,27 +303,24 @@ class ColorfulPiano {
         }
 
         try {
-            const { oscillators, gainNodes, masterGain, config } = this.createComplexTone(freq, this.currentInstrument);
+            const { oscillators, gainNodes, masterGain, config } = this.createClassicTone(freq, this.currentInstrument);
             
-            // Set master volume
-            masterGain.gain.setValueAtTime(0, this.audioContext.currentTime);
-            masterGain.gain.linearRampToValueAtTime(
-                this.volume * 0.3, 
-                this.audioContext.currentTime + config.attack
-            );
-
-            // Start all oscillators and set their individual gains
+            // Classic piano envelope
             const currentTime = this.audioContext.currentTime;
-            oscillators.forEach((oscillator, index) => {
-                const gainNode = gainNodes[index];
-                
-                // Set harmonic volume
-                gainNode.node.gain.setValueAtTime(0, currentTime);
-                gainNode.node.gain.linearRampToValueAtTime(
-                    gainNode.amplitude, 
-                    currentTime + config.attack
-                );
-                
+            const baseVolume = this.volume * 0.3;
+            
+            // Attack
+            masterGain.gain.setValueAtTime(0, currentTime);
+            masterGain.gain.linearRampToValueAtTime(baseVolume, currentTime + config.attack);
+            
+            // Decay to sustain
+            masterGain.gain.exponentialRampToValueAtTime(
+                baseVolume * config.sustain, 
+                currentTime + config.attack + config.decay
+            );
+            
+            // Start all oscillators
+            oscillators.forEach(oscillator => {
                 oscillator.start(currentTime);
             });
             
@@ -297,15 +344,16 @@ class ColorfulPiano {
         if (!note || !this.oscillators.has(note)) return;
 
         try {
-            const { oscillators, gainNodes, masterGain, config } = this.oscillators.get(note);
+            const { oscillators, masterGain, config } = this.oscillators.get(note);
             
-            // Fade out
+            // Classic piano release
             const currentTime = this.audioContext.currentTime;
+            
             masterGain.gain.cancelScheduledValues(currentTime);
             masterGain.gain.setValueAtTime(masterGain.gain.value, currentTime);
-            masterGain.gain.exponentialRampToValueAtTime(0.01, currentTime + config.release);
+            masterGain.gain.exponentialRampToValueAtTime(0.001, currentTime + config.release);
             
-            // Stop all oscillators
+            // Stop oscillators
             oscillators.forEach(oscillator => {
                 oscillator.stop(currentTime + config.release);
             });
@@ -329,7 +377,7 @@ class ColorfulPiano {
                 
                 masterGain.gain.cancelScheduledValues(currentTime);
                 masterGain.gain.setValueAtTime(masterGain.gain.value, currentTime);
-                masterGain.gain.exponentialRampToValueAtTime(0.01, currentTime + 0.1);
+                masterGain.gain.exponentialRampToValueAtTime(0.001, currentTime + 0.1);
                 
                 oscillators.forEach(oscillator => {
                     oscillator.stop(currentTime + 0.1);
@@ -350,24 +398,22 @@ class ColorfulPiano {
     }
 }
 
-// Initialize when page loads
-let colorfulPiano;
+// Initialize the classic piano
+let classicPiano;
 
 window.addEventListener('load', () => {
-    colorfulPiano = new ColorfulPiano();
+    classicPiano = new ClassicPiano();
     
-    // Expose to global scope for debugging
-    window.piano = colorfulPiano;
+    // Expose to global scope
+    window.piano = classicPiano;
     
-    console.log('🎹 Colorful Piano loaded!');
-    console.log('Features: 3 octaves, 8 instruments, colorful xylophone design');
-    console.log('Controls: Mouse/touch click keys, or use keyboard mapping');
-    console.log('Keyboard: Q-U (octave 2), Z-M (octave 3), I-] (octave 4)');
+    console.log('🎹 Classic Piano loaded!');
+    console.log('Features: Warm, natural piano sound with classic envelope');
 });
 
 // Handle page visibility change
 document.addEventListener('visibilitychange', () => {
-    if (document.hidden && colorfulPiano) {
-        colorfulPiano.stopAllNotes();
+    if (document.hidden && classicPiano) {
+        classicPiano.stopAllNotes();
     }
 });
